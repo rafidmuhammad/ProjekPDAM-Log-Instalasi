@@ -136,11 +136,11 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <!--Control Panel-->
+        <!-- mengatur styling dan button Control Panel atas-->
         <Border BorderBrush="Black" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="8" BorderThickness="1" Padding="12" CornerRadius="10" Background="Black">
             <StackPanel  Orientation="Horizontal">
-                <!--ROW1-->
-                <TextBlock  Text="Instalasi:" Margin="0,2,10,0" Foreground="White"/>
+                <!--combobox instalasi-->
+                <TextBlock  Text="Instalasi:" Margin="0,2,10,0" Foreground="White"/> 
                 <ComboBox Width="200" Margin="5,0,0,0" ItemsSource="{Binding Install}" SelectedItem="{Binding Path = SelectedInstall, Mode=OneWayToSource}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -148,6 +148,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
+                <!--combobox komponen-->
                 <TextBlock  Text="Komponen:" Margin="20,2,10,0" Foreground="White"/>
                 <ComboBox  Width="200" ItemsSource="{Binding Alat}" SelectedItem="{Binding Path=SelectedAlat, Mode=OneWayToSource}">
                     <ComboBox.ItemTemplate>
@@ -156,21 +157,22 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-
+                <!--memberikan keluaran nama file sesuai dengan instalasi yang dipilih-->
                 <TextBlock Text="{Binding Path=NamaFile, Mode=OneWay}" Margin="20,3,0,0" Foreground="white" MinWidth="170" />
+                <!--button open dan save-->
                 <Button Width="100" Margin="20,-1,0,0" Content="Open" x:Name="OpenData" HorizontalAlignment="Right" Style="{DynamicResource RoundedStyleButton}"/>
                 <Button x:Name="SaveData" Width="100" Margin="20,-1,0,0"  Content="Save"  HorizontalAlignment="Right" Style="{DynamicResource RoundedStyleButton}"/>
                 
             </StackPanel>
         </Border>
 
-        <!--ROW2-->
+        <!--mengatur panel di sebelah kiri-->
         <Border Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2" 
                 BorderThickness="1" BorderBrush="Black" 
                 CornerRadius="10" Background="Black" 
                 Margin="0,20,0,0" Padding="20">
             <StackPanel Orientation="Vertical">
-                <!--Textblocks-->
+                <!--Textblocks dan input text-->
                 <StackPanel Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal">
                         <TextBlock  Text="Tanggal:"  Foreground="White"/>
@@ -189,7 +191,7 @@
                         <TextBox   Margin="5,0,0,0" Width="100"
                      AcceptsReturn="True" TextWrapping="Wrap" x:Name="Keterangan" Style="{DynamicResource RoundedTextbox}"/>
                     </StackPanel>
-
+                    <!--input status dengan combobox-->
                     <StackPanel  Orientation="Horizontal" Margin="0,30,0,0">
                         <TextBlock  Text="Status:"  Foreground="White"/>
                         <ComboBox Width="100" ItemsSource="{Binding Path=Stat}" SelectedItem="{Binding Path=SelectedStat}" Margin="33,0,0,0">
@@ -201,9 +203,6 @@
                         </ComboBox>
 
                     </StackPanel>
-                    <!--texboxes-->
-                
-
 
 
                 </StackPanel>
@@ -211,11 +210,11 @@
                 <!--Buttons-->
                 <StackPanel Orientation="Vertical" Margin="0,20,0,0">
                     <Button  Content="Add"  x:Name="AddData" Style="{DynamicResource RoundedStyleButton}"/>
-                    <!--ROW6-->
+                    <!--tombo search-->
                     <Button  Content="Search (Keterangan)" Margin="0,10,0,0" x:Name="SearchData" Style="{DynamicResource RoundedStyleButton}"/>
-                    <!--ROW7-->
+                    <!--tombol clear-->
                     <Button  Content="Clear" Margin="0,10,0,0"  x:Name="ClearText" Style="{DynamicResource RoundedStyleButton}"/>
-                    <!--ROW9-->
+                    <!--tombol refresh-->
                     <Button  Content="Refresh" Margin="0,10,0,0" Style="{DynamicResource RoundedStyleButton}" x:Name="RefreshData"/>
                 </StackPanel>
             </StackPanel>
@@ -223,7 +222,7 @@
         </Border>
 
 
-        <!--ROW5-->
+        <!--menampilkan data dengan data grid dengan masing masing kolom-->
 
 
         <DataGrid Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="8" Grid.RowSpan="9" 

@@ -20,7 +20,7 @@ using Microsoft.Win32;
 namespace ProjekPDAM_1.ViewModels
 {
     public class ShellViewModel : Conductor<object>
-    {
+    {   // list yang berisi semua nilai instalasi dan peralatan yang mungkin
         string[] instalasi = { "KM.12", "KM.8", "GN.Sari", "KP.Damai", "Teritip", "Prapatan", "Baru Ulu", "ZAM" };
         string[] peralatan = {"P. Dist. 1", "P. Dist. 2", "P. Dist. 3","P. Dist. 4", "Alat Ukur Air Bersih","Blower","LVMDP","Act. Valve Filter 1","Act. Valve Filter 2","Act. Valve Filter 3","C. Block R. Filter","C. Block R. Lagon",
                                      "Alat Ukur Air Baku", "Alarm PLN", "P. Transfer 1", "P. Transfer 2","P. Transfer 3","P. Transfer 4","Varable Speed", "P. Filter 1", "P. Filter 2","P. Filter 3","P. Filter 4", "Genset 1", "Genset 2","Sumur 2 ( MUI )","Sumur 3 ( Kopkar )","C. Block R. Dist.",
@@ -48,27 +48,27 @@ namespace ProjekPDAM_1.ViewModels
         
         
         
-        string[] status = { "", "NORMAL", "ABNORMAL" };
+        string[] status = { "", "NORMAL", "ABNORMAL" }; //nilai status yang mungkin
 
         public ShellViewModel()
         {
             for (int i = 0; i < 8; i++)
             {
-                Install.Add(new InstalasiPDAM { Instalasi = instalasi[i] });
+                Install.Add(new InstalasiPDAM { Instalasi = instalasi[i] }); //memasukkan nilai instalasi dari list di atas ke penampung
             }
             Array.Sort(peralatan,StringComparer.InvariantCulture);
 
             for (int i = 0; i < peralatan.Length; i++)
             {
-                Alat.Add(new PeralatanPDAM { Peralatan = peralatan[i] });
+                Alat.Add(new PeralatanPDAM { Peralatan = peralatan[i] }); //memasukkan nilai peralatan dari list di atas ke penampung
             }
 
 
             for (int i = 0; i < 3; i++)
             {
-                Stat.Add(new StatusPDAM { Status = status[i] });
+                Stat.Add(new StatusPDAM { Status = status[i] }); //memasukkan nilai status dari list di atas ke penampung
             }
-            ViewData = CollectionViewSource.GetDefaultView(Data);
+            ViewData = CollectionViewSource.GetDefaultView(Data); //meng-assign nilai viewdata yang digunakan pada datagrid dari nilai view dari data
 
 
         }
@@ -77,41 +77,41 @@ namespace ProjekPDAM_1.ViewModels
 
         private string _tanggal = string.Empty;
 
-        public string Tanggal
+        public string Tanggal //terhubung langsung dengan textfield tanggal pada view
         {
             get { return _tanggal; }
             set
             {
                 _tanggal = value;
-                NotifyOfPropertyChange(() => Tanggal);
+                NotifyOfPropertyChange(() => Tanggal); //memberitahukan jika adanya perubahan data pada textfield tanggal
             }
         }
 
         private string _komponen = string.Empty;
 
-        public string Komponen
+        public string Komponen //terhubung langsung dengan textfield komponen pada view
         {
             get { return _komponen; }
             set
             {
                 _komponen = value;
-                NotifyOfPropertyChange(() => Komponen);
+                NotifyOfPropertyChange(() => Komponen); //memberitahukan jika adanya perubahan data pada textfield komponen
             }
         }
 
         private string _keterangan = string.Empty;
 
-        public string Keterangan
+        public string Keterangan //terhubung langsung dengan textfield keterangan pada view
         {
             get { return _keterangan; }
             set
             {
                 _keterangan = value;
-                NotifyOfPropertyChange(() => Keterangan);
+                NotifyOfPropertyChange(() => Keterangan); //memberitahukan jika adanya perubahan data pada textfield keterangan
             }
         }
 
-        private InstalasiPDAM _selectedInstall;
+        private InstalasiPDAM _selectedInstall; //menyimpan pilihan dari combobox view 
 
         public InstalasiPDAM SelectedInstall
         {
@@ -119,12 +119,12 @@ namespace ProjekPDAM_1.ViewModels
             set
             {
                 _selectedInstall = value;
-                NotifyOfPropertyChange(() => SelectedInstall);
-                NotifyOfPropertyChange(() => NamaFile);
+                NotifyOfPropertyChange(() => SelectedInstall); //memberithaunkan jika nilai yang dipilih berubah ke variabel sendiri
+                NotifyOfPropertyChange(() => NamaFile);    //memberitahukan jika nilai yang dipilih berubah ke nama file
             }   
         }
 
-        private PeralatanPDAM _selectedAlat;
+        private PeralatanPDAM _selectedAlat; //menyimpan pilihan dari combobox view 
 
         public PeralatanPDAM SelectedAlat
         {
@@ -132,12 +132,12 @@ namespace ProjekPDAM_1.ViewModels
             set
             {
                 _selectedAlat = value;
-                NotifyOfPropertyChange(() => SelectedAlat);
-                NotifyOfPropertyChange(() => NamaFile);
+                NotifyOfPropertyChange(() => SelectedAlat); //memberithaunkan jika nilai yang dipilih berubah ke variabel sendiri
+                NotifyOfPropertyChange(() => NamaFile);  //memberitahukan jika nilai yang dipilih berubah ke nama file
             }
         }
 
-        private DataModel _selectedData;
+        private DataModel _selectedData; //menampung nilai terpilih dari data grid membantu pada fitur delete
 
         public DataModel SelectedData
         {
@@ -149,7 +149,7 @@ namespace ProjekPDAM_1.ViewModels
             }
         }
 
-        private StatusPDAM _selectedStat;
+        private StatusPDAM _selectedStat; // menampung nilai yang dipilih dari combobox status
 
         public StatusPDAM SelectedStat
         {
@@ -161,11 +161,11 @@ namespace ProjekPDAM_1.ViewModels
             }
         }
 
-        public String NamaFile => $"{SelectedInstall?.Instalasi}.xlsx";
+        public String NamaFile => $"{SelectedInstall?.Instalasi}.xlsx"; //terhubung langsung dengan view menampilkan nama file 
 
         private BindableCollection<InstalasiPDAM> _install = new BindableCollection<InstalasiPDAM>();
 
-        public BindableCollection<InstalasiPDAM> Install
+        public BindableCollection<InstalasiPDAM> Install //menampung list instalasi
         {
             get { return _install; }
             set { _install = value; }
@@ -173,7 +173,7 @@ namespace ProjekPDAM_1.ViewModels
 
         private BindableCollection<PeralatanPDAM> _alat = new BindableCollection<PeralatanPDAM>();
 
-        public BindableCollection<PeralatanPDAM> Alat
+        public BindableCollection<PeralatanPDAM> Alat //menampung list peralatan
         {
             get { return _alat; }
             set { _alat = value; }
@@ -182,7 +182,7 @@ namespace ProjekPDAM_1.ViewModels
 
         private BindableCollection<DataModel> _data = new BindableCollection<DataModel>();
 
-        public BindableCollection<DataModel> Data
+        public BindableCollection<DataModel> Data //menampung data {tanggal , komponen, keternagan, status}
         {
             get { return _data; }
             set
@@ -194,7 +194,7 @@ namespace ProjekPDAM_1.ViewModels
 
         private BindableCollection<StatusPDAM> _stat = new BindableCollection<StatusPDAM>();
 
-        public BindableCollection<StatusPDAM> Stat
+        public BindableCollection<StatusPDAM> Stat //menampung status
         {
             get { return _stat; }
             set { _stat = value; }
@@ -210,10 +210,7 @@ namespace ProjekPDAM_1.ViewModels
 
         
 
-
-
-
-        //filtering
+        //view untuk dihubungkan langsung ke data grid
         private ICollectionView _viewData;
 
         public ICollectionView  ViewData
@@ -230,82 +227,87 @@ namespace ProjekPDAM_1.ViewModels
         }
 
 
-
+        //untuk memberi tanda apakah dapat menghapus data pada text field
         public bool CanClearText(string tanggal, string komponen, string keterangan)
         {
             return !String.IsNullOrWhiteSpace(tanggal) || !String.IsNullOrWhiteSpace(komponen) || !String.IsNullOrWhiteSpace(keterangan);
         }
 
+        //menghapus data pada text field
         public void ClearText(string tanggal, string komponen, string keterangan)
         {
             Tanggal = "";
             Komponen = "";
             Keterangan = "";
         }
-        
+
+        //untuk memberi tanda apakah dapat menambah data
         public bool CanAddData(string tanggal, string komponen, string keterangan)
         {
             return !String.IsNullOrWhiteSpace(tanggal) && !String.IsNullOrWhiteSpace(komponen) && !String.IsNullOrWhiteSpace(keterangan);
         }
+
+        //perintah untuk menambah data
         public void AddData(string tanggal, string komponen, string keterangan)
         {
             DataModel tempAdd = new DataModel();
             DateTime d;
-            var formatstring = new string[] { "dd/MM/yyyy", "d/M/yyyy" };
-            if (DateTime.TryParseExact(tanggal, formatstring, CultureInfo.InvariantCulture, DateTimeStyles.None, out d))
+            var formatstring = new string[] { "dd/MM/yyyy", "d/M/yyyy" }; //dapat memberikan masukan tanggal dengan dua format
+            if (DateTime.TryParseExact(tanggal, formatstring, CultureInfo.InvariantCulture, DateTimeStyles.None, out d)) //melakukan pengecekan format
             {
+                //assignment data
                 tempAdd.Tanggal = d;
                 tempAdd.Komponen = komponen;
                 tempAdd.Keterangan = keterangan;
                 tempAdd.status = SelectedStat?.Status;
-                Data.Add(tempAdd);
-                NotifyOfPropertyChange(() => Data);
+                Data.Add(tempAdd); //menambahkan data
+                NotifyOfPropertyChange(() => Data); //memberitahukan jika data bertambah
             }
             else
             {
-                MessageBox.Show("Tanggal Salah!");
+                MessageBox.Show("Tanggal Salah!"); //pesan jika tanggal salah format
             }
         }
 
 
-        public void DeleteData()
+        public void DeleteData() //untuk menghapus data
         {
             Data.Remove(SelectedData);
             NotifyOfPropertyChange(() => Data);
         }
         
-        public bool CanSearchData(string keterangan)
+        public bool CanSearchData(string keterangan) //untuk memberik tanda apakah dapat mencari data
         {
             return !String.IsNullOrWhiteSpace(keterangan);
         }
         
-        public void SearchData(string keterangan)
+        public void SearchData(string keterangan) //untuk melakukan pencarian data
         {
             ViewData.Filter = FilterData;
             ViewData.Refresh();
         }
 
 
-        public void RefreshData()
+        public void RefreshData() //untuk mengembalikan tampilan data grid dengan kondisi data sekarang
         {
             ViewData.Filter = null;
         }
         
-        private bool FilterData(object obj)
+        private bool FilterData(object obj) //untuk melakukan filtering (search)
         {
             if(obj is DataModel dataModel)
             {
-                return dataModel.Keterangan.ToLower().Contains(Keterangan.ToLower());
+                return dataModel.Keterangan.ToLower().Contains(Keterangan.ToLower()); //mencari nilai yang match pada kolom keterangan
             }
 
             return false;
         }
 
-        public void OpenData()
+        public void OpenData() //membuka data dari file excel sesuai dengan instalasi yang dipilih
         {
             Data.Clear();
             DataTable dt = new DataTable();
-            if (String.Compare(NamaFile, "-.xlsx") != 0 && SelectedAlat?.Peralatan != null && SelectedInstall?.Instalasi != null)
+            if (String.Compare(NamaFile, "-.xlsx") != 0 && SelectedAlat?.Peralatan != null && SelectedInstall?.Instalasi != null) //pengecekan adanya file, adanya instalasi dan peralatan yang dipilih 
             {
                 try 
                 { 
@@ -316,7 +318,7 @@ namespace ProjekPDAM_1.ViewModels
                             var rows = workbook.Worksheet(SelectedAlat?.Peralatan).RowsUsed();
                         foreach (var row in rows)
                             {
-                                //adding columns
+                                //adding columns ke data table
                                 if (isFirstRow)
                                 {
                                     foreach (IXLCell cell in row.Cells())
@@ -325,13 +327,14 @@ namespace ProjekPDAM_1.ViewModels
                                 }
                                 else
                                 {
+                                    //menambahkan baris ke data table
                                     dt.Rows.Add();
                                     int i = 0;
                                     foreach (IXLCell cell in row.Cells())
                                         dt.Rows[dt.Rows.Count - 1][i++] = cell.Value.ToString();
                                 }
                             }
-
+                            //memindahkan data dari datatable ke list
                             for (int i = 0; i < dt.Rows.Count; i++)
                             {
                                 DataModel temp = new DataModel();
@@ -356,7 +359,7 @@ namespace ProjekPDAM_1.ViewModels
         }
 
 
-        public void SaveData()
+        public void SaveData() //menyimpan data
         {
             try 
             { 
@@ -366,25 +369,25 @@ namespace ProjekPDAM_1.ViewModels
                     dataTable.Columns.Add("Keterangan");
                     dataTable.Columns.Add("Status");
 
-                    foreach (var element in Data)
+                    foreach (var element in Data) //menambahkan setiap baris yang ada pada 'Data' ke datatable
                     {
 
                         dataTable.Rows.Add(element.Tanggal, element.Komponen, element.Keterangan, element.status);
                     }
 
 
-                    using (XLWorkbook workbook = new XLWorkbook(NamaFile))
+                    using (XLWorkbook workbook = new XLWorkbook(NamaFile)) // dari datatable ke worksheet
                     {
                     try
                     {
-                        workbook.Worksheets.Delete(SelectedAlat?.Peralatan);
-                        workbook.Worksheets.Add(dataTable, SelectedAlat?.Peralatan).Style.Alignment.WrapText = true;
-                        workbook.Save();
+                        workbook.Worksheets.Delete(SelectedAlat?.Peralatan); //menghapus worksheet dahulu
+                        workbook.Worksheets.Add(dataTable, SelectedAlat?.Peralatan).Style.Alignment.WrapText = true; //menambahkan data ke worksheet
+                        workbook.Save(); //menyimpan worksheet
                     }
-                    catch
+                    catch //jika tidak ada worksheet
                     {
-                        workbook.Worksheets.Add(SelectedAlat?.Peralatan);
-                        workbook.Save();
+                        workbook.Worksheets.Add(SelectedAlat?.Peralatan);  //membuat worksheet baru
+                        workbook.Save(); //menyimpan worksheet
                         MessageBox.Show("Sheet terkait sudah dibuat! Ulangi Penambahan Data!");
                     }
                     }
